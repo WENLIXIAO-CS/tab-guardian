@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Tab Guardian",
-  "version": "3.4.0",
+  "version": "3.5.0",
   "description": "Monitor tab usage, detect unused tabs, and free up memory with one click.",
   "permissions": [
     "tabs",
@@ -10,10 +10,13 @@
     "storage",
     "system.memory",
     "favicon",
-    "scripting",
-    "browsingData"
+    "browsingData",
+    "activeTab"
   ],
-  "host_permissions": [
+  "optional_permissions": [
+    "scripting"
+  ],
+  "optional_host_permissions": [
     "<all_urls>"
   ],
   "background": {

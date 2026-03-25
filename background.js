@@ -168,7 +168,14 @@ chrome.runtime.onStartup.addListener(async () => {
 
 // ── Per-tab memory via scripting ────────────────────────────────────
 
+async function hasScriptingPermission() {
+  return new Promise((resolve) => {
+    chrome.permissions.contains({ permissions: ["scripting"], origins: ["<all_urls>"] }, resolve);
+  });
+}
+
 async function getTabMemory(tabId) {
+  if (!(await hasScriptingPermission())) return null;
   try {
     // Step 1: Get JS heap (synchronous — works reliably)
     const heapResults = await chrome.scripting.executeScript({

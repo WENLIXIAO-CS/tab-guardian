@@ -296,5 +296,14 @@ document.addEventListener("DOMContentLoaded", () => {
     document.documentElement.setAttribute("data-theme", e.matches ? "dark" : "light");
   });
 
-  loadStats();
+  // Request optional permissions (scripting + host) then load
+  chrome.permissions.contains({ permissions: ["scripting"], origins: ["<all_urls>"] }, (granted) => {
+    if (granted) {
+      loadStats();
+    } else {
+      chrome.permissions.request({ permissions: ["scripting"], origins: ["<all_urls>"] }, (granted) => {
+        loadStats(); // Load either way — memory just shows "—" if not granted
+      });
+    }
+  });
 });
