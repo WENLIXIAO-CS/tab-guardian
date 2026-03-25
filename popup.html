@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+  <script src="popup.js" defer></script>
+</head>
+<body class="w-[460px] h-[580px] flex flex-col bg-base-300 overflow-hidden">
+
+  <!-- System memory thin bar at top -->
+  <div class="h-1.5 bg-base-200 relative overflow-hidden flex-shrink-0">
+    <div id="mem-bar-thin" class="h-full transition-all duration-500 rounded-r"></div>
+  </div>
+
+  <!-- Header (fixed) -->
+  <div class="px-5 pt-4 pb-3 bg-base-200 flex-shrink-0">
+    <div class="flex items-center justify-between mb-3">
+      <span class="text-sm font-semibold tracking-tight text-base-content opacity-90">Tab Guardian</span>
+      <span id="mem-label" class="text-xs text-base-content opacity-40 font-mono"></span>
+    </div>
+    <div class="grid grid-cols-3 gap-2">
+      <div class="bg-base-300 rounded-lg px-3 py-2 text-center">
+        <div id="stat-total" class="text-lg font-bold text-base-content">0</div>
+        <div class="text-[10px] uppercase tracking-wider text-base-content opacity-40">tabs</div>
+      </div>
+      <div class="bg-base-300 rounded-lg px-3 py-2 text-center">
+        <div id="stat-stale" class="text-lg font-bold text-error">0</div>
+        <div class="text-[10px] uppercase tracking-wider text-base-content opacity-40">stale</div>
+      </div>
+      <div class="bg-base-300 rounded-lg px-3 py-2 text-center">
+        <div id="stat-mem" class="text-lg font-bold text-warning">0%</div>
+        <div class="text-[10px] uppercase tracking-wider text-base-content opacity-40">memory</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Actions bar (fixed) -->
+  <div class="px-5 py-2.5 bg-base-200 border-t border-base-300 flex items-center justify-between flex-shrink-0">
+    <button id="btn-close-stale" class="btn btn-sm btn-error btn-outline gap-1.5 border-opacity-40 hover:border-opacity-100" disabled>
+      <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+      </svg>
+      <span id="btn-close-text" class="text-xs">Clean up</span>
+    </button>
+    <div class="flex items-center gap-2">
+      <span class="text-[10px] text-base-content opacity-30 uppercase tracking-wider">Idle</span>
+      <select id="threshold-select" class="select select-xs select-bordered bg-base-300 border-base-content border-opacity-10 text-xs min-h-0 h-7">
+        <option value="15">15m</option>
+        <option value="30">30m</option>
+        <option value="60" selected>1h</option>
+        <option value="120">2h</option>
+        <option value="240">4h</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Scrollable tab list -->
+  <div class="flex-1 overflow-y-auto min-h-0">
+    <!-- Stale tabs group -->
+    <div id="group-stale" class="hidden">
+      <div class="px-5 py-1.5 bg-base-300 flex items-center gap-2 border-t border-base-content border-opacity-5 sticky top-0 z-10">
+        <div class="w-1.5 h-1.5 rounded-full bg-error"></div>
+        <span class="text-[10px] uppercase tracking-wider text-error opacity-70 font-semibold">Stale</span>
+        <span id="stale-count" class="text-[10px] text-error opacity-50"></span>
+      </div>
+      <div id="list-stale"></div>
+    </div>
+
+    <!-- Active tabs group -->
+    <div id="group-active">
+      <div class="px-5 py-1.5 bg-base-300 flex items-center gap-2 border-t border-base-content border-opacity-5 sticky top-0 z-10">
+        <div class="w-1.5 h-1.5 rounded-full bg-success"></div>
+        <span class="text-[10px] uppercase tracking-wider text-success opacity-70 font-semibold">Active</span>
+        <span id="active-count" class="text-[10px] text-success opacity-50"></span>
+      </div>
+      <div id="list-active"></div>
+    </div>
+  </div>
+
+</body>
+</html>

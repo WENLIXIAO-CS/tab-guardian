@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body::-webkit-scrollbar, .overflow-y-auto::-webkit-scrollbar { width: 4px; }
+body::-webkit-scrollbar-thumb, .overflow-y-auto::-webkit-scrollbar-thumb { background: rgba(128,128,128,0.25); border-radius: 2px; }
+body::-webkit-scrollbar-thumb:hover, .overflow-y-auto::-webkit-scrollbar-thumb:hover { background: rgba(128,128,128,0.4); }
+
+.tab-row { cursor: pointer; transition: background 0.1s; }
+[data-theme="dark"] .tab-row:hover { background: rgba(255,255,255,0.03); }
+[data-theme="light"] .tab-row:hover { background: rgba(0,0,0,0.03); }
+
+.dropdown-content { z-index: 50; }
